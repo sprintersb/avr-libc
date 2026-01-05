@@ -17,7 +17,7 @@
 
 This is a quick followup on v2.3.0 with regression fixes.
 
-## Issues closed
+## Regressions fixed
 
 - [#1060][1060] adds a reference to `main` in `crt<mcu>.o`.
   It fixes an `undefined reference to main` error from the linker when
