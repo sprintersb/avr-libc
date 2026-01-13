@@ -1,18 +1,3 @@
-# Changes since AVR-LibC v2.3.1
-
-## General
-
-## ABI and API Changes
-
-## Improvements and Additions
-
-## Issues closed
-
-## Pull Requests
-
-## Other Changes
-
-
 # Changes in AVR-LibC v2.3.1
 
 This is a quick followup on v2.3.0 with regression fixes.
