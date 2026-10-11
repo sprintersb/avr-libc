@@ -27,9 +27,17 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 if BUILD_FXLIB
-SUBDIRS = fplib fxlib
+MAYBE_FXLIB = fxlib
 else
-SUBDIRS = fplib
+MAYBE_FXLIB =
 endif
 
-DIST_SUBDIRS = fplib fxlib
+if BUILD_FP64LIB
+MAYBE_FP64LIB = fp64lib
+else
+MAYBE_FP64LIB =
+endif
+
+SUBDIRS = fplib $(MAYBE_FXLIB) $(MAYBE_FP64LIB)
+
+DIST_SUBDIRS = fplib fxlib fp64lib
