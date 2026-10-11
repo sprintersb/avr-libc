@@ -321,6 +321,26 @@ DO_IF_CC_ASM([whether $CC supports .gnu_attribute 12],dnl
 dnl Does AM_CONDITIONAL(BUILD_FXLIB, ...)
 CHECK_FIXED_POINT
 
+dnl Should libm/fp64lib be built as libfp64.a?
+AC_MSG_CHECKING([whether to build fp64lib / libfp64.a])
+AC_ARG_ENABLE(fp64lib,
+[AS_HELP_STRING([--enable-fp64lib],[build libfp64.a (enabled per default)])],
+[case "${enableval}" in
+  yes) ENABLE_FP64LIB_yesno=yes ;;
+  no)  ENABLE_FP64LIB_yesno=no ;;
+  *)   AC_MSG_ERROR([bad value ${enableval} for --enable-fp64lib]) ;;
+ esac], [ENABLE_FP64LIB_yesno=yes])dnl
+AC_MSG_RESULT([$ENABLE_FP64LIB_yesno])
+AS_IF([test x$ENABLE_FP64LIB_yesno = xyes],
+      [AVR_LIBC_WITH_FP64LIB=1],
+      [AVR_LIBC_WITH_FP64LIB=0])
+AC_SUBST([AVR_LIBC_WITH_FP64LIB])
+AC_SUBST([ENABLE_FP64LIB_yesno])
+AM_CONDITIONAL([BUILD_FP64LIB], [test x$ENABLE_FP64LIB_yesno = xyes])
+
+dnl AC_DEFINE: DOUBLE_COMPARE_BOOL, DOUBLE_COMPARE_TRISTATE
+dnl AC_SUBST: DOUBLE_COMPARE_tribool
+CHECK_DOUBLE_COMPARISON
 
 dnl == Documentation =========================================================
 
@@ -538,6 +558,7 @@ AC_CONFIG_FILES([
 	doc/examples/Makefile
 	include/Makefile
 	include/avr/Makefile
+	include/avr/fp64lib/Makefile
 	include/bits/Makefile
 	include/bits/devinfo.h
 	include/compat/Makefile
@@ -552,6 +573,7 @@ AC_CONFIG_FILES([
 	libc/time/Makefile
 	libm/Makefile
 	libm/fplib/Makefile
+	libm/fp64lib/Makefile
 	libm/fxlib/Makefile
 	m4/Makefile
 	scripts/Makefile

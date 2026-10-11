@@ -87,4 +87,10 @@
     Library revision number. */
 #define __AVR_LIBC_REVISION__       @AVR_LIBC_REVISION@
 
+/** \ingroup avr_version
+    Whether fp64lib is integrated into AVR-LibC as \c libfp64.a and can
+    be linked with \c \-lfp64 or, since AVR GCC 16 with \c \-mfp64lib.
+    \since AVR-LibC 2.4 */
+#define __AVR_LIBC_WITH_FP64LIB__   @AVR_LIBC_WITH_FP64LIB@
+
 #endif /* _AVR_VERSION_H_ */

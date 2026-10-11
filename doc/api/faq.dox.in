@@ -2532,6 +2532,14 @@ They influence how pars of the library behave.
   <td> @DOX_MULTI_OPT@
   <td> \c <math.h>, Libraries
 <tr>
+  <td> 64-bit double comparison
+  <td> @DOUBLE_COMPARE_tribool@
+  <td> fp64lib
+<tr>
+  <td> Built \c libfp64.a
+  <td> @ENABLE_FP64LIB_yesno@
+  <td> fp64lib
+<tr>
   <td>
 \if STDFIX_AVRLIBC_H_NOT_INCLUDED
     Fixed-point<sup>1</sup>

@@ -34,7 +34,7 @@ AVR_TARGET_CFLAGS   = $(MULTIOPT_<<ident>>) <<lib_cflags>>
 AVR_TARGET_ASFLAGS  = $(MULTIOPT_<<ident>>) <<lib_asflags>>
 AVR_INSTALL_DIR     = $(MULTIDIR_<<ident>>)
 
-VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio:$(top_srcdir)/libm/fplib:$(top_srcdir)/libm/fxlib:$(top_srcdir)/libc/time
+VPATH = $(top_srcdir)/libc/stdlib:$(top_srcdir)/libc/pmstring:$(top_srcdir)/libc/string:$(top_srcdir)/libc/misc:$(top_srcdir)/libc/stdio:$(top_srcdir)/libm/fplib:$(top_srcdir)/libm/fp64lib:$(top_srcdir)/libm/fxlib:$(top_srcdir)/libc/time
 
 if HAS_MULTI_<<ident>>
 
@@ -57,13 +57,18 @@ __install_dir = $(prefix)/avr/lib/$(AVR_INSTALL_DIR)
 avrdir = $(__install_dir)
 avrlibdir = $(__install_dir)
 
+if BUILD_FP64LIB
+MAYBE_LIBFP64_A = libfp64.a
+endif
+
 avr_LIBRARIES = \
 	libc.a \
 	libprintf_min.a \
 	libprintf_flt.a \
 	libscanf_min.a \
 	libscanf_flt.a \
-	libm.a
+	libm.a \
+	$(MAYBE_LIBFP64_A)
 
 include $(top_srcdir)/libc/stdlib/Rules.am
 include $(top_srcdir)/libc/pmstring/Rules.am
@@ -76,6 +81,13 @@ include $(top_srcdir)/libm/fplib/Rules.am
 
 if BUILD_FXLIB
 include $(top_srcdir)/libm/fxlib/Rules.am
+endif
+
+if BUILD_FP64LIB
+include $(top_srcdir)/libm/fp64lib/Rules.am
+nodist_libfp64_a_SOURCES = \
+	$(fp64lib_a_c_sources) \
+	$(fp64lib_a_asm_sources)
 endif
 
 nodist_libc_a_SOURCES = \

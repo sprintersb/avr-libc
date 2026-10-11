@@ -41,3 +41,7 @@ EXTRA_DIST = \
     version.h.in
 
 CLEANFILES = version.h
+
+if BUILD_FP64LIB
+SUBDIRS = fp64lib
+endif
